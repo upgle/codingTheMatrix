@@ -1,5 +1,4 @@
 # Copyright 2013 Philip N. Klein
-import copy
 
 def getitem(v,k):
     """
@@ -13,10 +12,6 @@ def getitem(v,k):
     0
     """
     assert k in v.D
-    if k in v.f:
-        return v.f[k]
-    else:
-        return 0
     pass
 
 def setitem(v,k,val):
@@ -37,7 +32,6 @@ def setitem(v,k,val):
     0
     """
     assert k in v.D
-    v.f[k] = val
     pass
 
 def equal(u,v):
@@ -48,11 +42,11 @@ def equal(u,v):
     Consider using brackets notation u[...] and v[...] in your procedure
     to access entries of the input vectors.  This avoids some sparsity bugs.
 
-    >>> Vec(['a', 'b', 'c'], {'a':0}) == Vec(['a', 'b', 'c'], {'b':0})
+    >>> Vec({'a', 'b', 'c'}, {'a':0}) == Vec({'a', 'b', 'c'}, {'b':0})
     True
-    >>> Vec(['a', 'b', 'c'], {'a': 0}) == Vec(['a', 'b', 'c'], {})
+    >>> Vec({'a', 'b', 'c'}, {'a': 0}) == Vec({'a', 'b', 'c'}, {})
     True
-    >>> Vec(['a', 'b', 'c'], {}) == Vec(['a', 'b', 'c'], {'a': 0})
+    >>> Vec({'a', 'b', 'c'}, {}) == Vec({'a', 'b', 'c'}, {'a': 0})
     True
 
     Be sure that equal(u, v) checks equalities for all keys from u.f and v.f even if
@@ -74,18 +68,7 @@ def equal(u,v):
     False
     """
     assert u.D == v.D
-    isZeroVec = True;
-    for key in u.f: 
-        if u.f[key] != 0: 
-            isZeroVec = False 
-            break
-    for key in v.f: 
-        if v.f[key] != 0: 
-            isZeroVec = False 
-            break
-    
-    if isZeroVec: return True
-    else : return u.f == v.f
+    pass
 
 def add(u,v):
     """
@@ -122,22 +105,7 @@ def add(u,v):
     True
     """
     assert u.D == v.D
-    # check Zero Vector
-    if u.f == {} : 
-        return v
-    if v.f == {} :
-        return u
-    returnVec = Vec( copy.deepcopy(u.D) , copy.deepcopy(u.f) )
-
-    for key in v.f:
-        if key in returnVec.f : returnVec.f[key] = returnVec.f[key] + v.f[key]
-        else : returnVec.f[key] = v.f[key]
-        pass
     pass
-
-    return returnVec
-
-
 
 def dot(u,v):
     """
@@ -171,18 +139,7 @@ def dot(u,v):
     12
     """
     assert u.D == v.D
-    mulVec = 0
-    for key in u.D:
-        temp1 = u.f.get(key)
-        temp2 = v.f.get(key)
-        if temp1 == None: 
-            temp1 = 0
-        if temp2 == None:
-            temp2 = 0
-        mulVec += temp1 * temp2
-
-    return mulVec
-
+    pass
 
 def scalar_mul(v, alpha):
     """
@@ -202,15 +159,7 @@ def scalar_mul(v, alpha):
     >>> u == Vec({'x','y','z','w'},{'x':1,'y':2,'z':3,'w':4})
     True
     """
-    zero = Vec( v.D , {})
-    returnVec = Vec( copy.deepcopy(v.D) , copy.deepcopy(v.f) )
-    if alpha == 0: return zero
-    elif alpha == 1: return returnVec
-    else : 
-        for key in returnVec.f : 
-            returnVec.f[key] = returnVec.f[key] * alpha
-    return returnVec
-
+    pass
 
 def neg(v):
     """
@@ -227,11 +176,7 @@ def neg(v):
     >>> -Vec({'a','b','c'}, {'a':1}) == Vec({'a','b','c'}, {'a':-1})
     True
     """
-    returnVec = Vec( copy.deepcopy(v.D) , copy.deepcopy(v.f) )
-    for key in returnVec.f : 
-        returnVec.f[key] = - returnVec.f[key]
-    return returnVec
-
+    pass
 
 ###############################################################################################################################
 
